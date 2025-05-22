@@ -272,7 +272,3 @@ join books as bk
 on ist.issued_book_isbn = bk.isbn
 group by 1 , 2;
 
-
-
- Conclusion
-This Library Management System using SQL is more than just a database project—it is a showcase of real-world SQL application that highlights your ability to design, manage, and query a relational database system effectively. Ideal for students, job seekers, and developers building a strong portfolio in backend and database management
