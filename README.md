@@ -67,106 +67,97 @@ this wide variety of sql operations not only handles basic data manipulation but
 
 ⚙️ schema.sql
 
---Create Database 
+-- Create Database
+CREATE DATABASE databasename;
 
-create database databasename;
+-- Create branch table
+DROP TABLE IF EXISTS branch;
+CREATE TABLE branch (
+    branch_id VARCHAR(5) PRIMARY KEY,
+    manager_id VARCHAR(5),
+    branch_address VARCHAR(11),
+    contact_no VARCHAR(10)
+);
 
---Create a branch Table
-DROP TABLE IF EXISTS branch ; 
-CREATE TABLE branch
-    (
-	 branch_id varchar(5) PRIMARY KEY,
-	 manager_id  varchar (5),
-	 branch_address varchar(11),
-	 contact_no varchar(10)
-	 );
+-- Create employees table
+DROP TABLE IF EXISTS employees;
+CREATE TABLE employees (
+    emp_id VARCHAR(10) PRIMARY KEY,
+    emp_name VARCHAR(50),
+    position VARCHAR(20),
+    salary INT,
+    branch_id VARCHAR(15)
+);
 
---create Employees Table
-DROP TABLE IF EXISTS employees ;
-CREATE TABLE employees
-     (
-         emp_id	varchar (10) PRIMARY KEY,
-		 emp_name varchar (50),
-		 position varchar (20),
-		 salary	int,
-		 branch_id varchar (15) --FK
-	 )
-
---crete Table books
+-- Create books table
 DROP TABLE IF EXISTS books;
-CREATE TABLE books
-     (
-         isbn varchar(25) PRIMARY KEY,
-		 book_title	varchar(100),
-		 category varchar(50),
-		 rental_price float,
-		 status	varchar(25),
-		 author	varchar(50),
-		 publisher varchar(50)
-     ) ;
+CREATE TABLE books (
+    isbn VARCHAR(25) PRIMARY KEY,
+    book_title VARCHAR(100),
+    category VARCHAR(50),
+    rental_price FLOAT,
+    status VARCHAR(25),
+    author VARCHAR(50),
+    publisher VARCHAR(50)
+);
 
---Create table members
-DROP TABLE IF EXISTS members ;
-CREATE TABLE members
-     ( 
-	 member_id varchar(10) PRIMARY KEY,
-	 member_name	varchar(25),
-	 member_address	 varchar(75),
-	 reg_date DATE
-	  );
+-- Create members table
+DROP TABLE IF EXISTS members;
+CREATE TABLE members (
+    member_id VARCHAR(10) PRIMARY KEY,
+    member_name VARCHAR(25),
+    member_address VARCHAR(75),
+    reg_date DATE
+);
 
---create table 
+-- Create issued_status table
 DROP TABLE IF EXISTS issued_status;
-CREATE TABLE issued_status
-     (
-	 issued_id varchar(10) PRIMARY KEY, --FK
-	 issued_member_id varchar(10)	, --FK
-	 issued_book_name varchar(75) ,
-	 issued_date date ,
-	 issued_book_isbn varchar(25) , --FK
-	 issued_emp_id varchar(10) --FK
-	 )
--- Create Table 
-DROP TABLE IF EXISTS return_status ;
-CREATE TABLE return_status
-     ( 
-	 return_id varchar(10) PRIMARY KEY,
-	 issued_id	varchar(10) ,
-	 return_book_name	varchar(75) ,
-	 return_date date,
-	 return_book_isbn varchar(20) 
-	 )
+CREATE TABLE issued_status (
+    issued_id VARCHAR(10) PRIMARY KEY,
+    issued_member_id VARCHAR(10),
+    issued_book_name VARCHAR(75),
+    issued_date DATE,
+    issued_book_isbn VARCHAR(25),
+    issued_emp_id VARCHAR(10)
+);
 
---Creating relationship between them
----issued_status ---to---- members
-alter table issued_status
-add constraint FK_members
-foreign key (issued_member_id)
-references members(member_id) ;
+-- Create return_status table
+DROP TABLE IF EXISTS return_status;
+CREATE TABLE return_status (
+    return_id VARCHAR(10) PRIMARY KEY,
+    issued_id VARCHAR(10),
+    return_book_name VARCHAR(75),
+    return_date DATE,
+    return_book_isbn VARCHAR(20)
+);
 
----issued_status--to----books
-alter table issued_status
-add constraint FK_books
-foreign key (issued_book_isbn)
-references books(isbn) ;
+-- Creating relationships between tables
 
----issued_status--to---employees
-alter table issued_status
-add constraint FK_employee
-foreign key (issued_emp_id)
-references employees(emp_id) ;
+ALTER TABLE issued_status
+    ADD CONSTRAINT FK_members
+    FOREIGN KEY (issued_member_id)
+    REFERENCES members(member_id);
 
----employees--to----branch
-alter table employees
-add constraint FK_branch
-foreign key (branch_id)
-references branch(branch_id);
+ALTER TABLE issued_status
+    ADD CONSTRAINT FK_books
+    FOREIGN KEY (issued_book_isbn)
+    REFERENCES books(isbn);
 
-----return_status--to----issued_status
-alter table return_status
-add constraint FK_issued_status
-foreign key (issued_id)
-references issued_status(issued_id) ; 
+ALTER TABLE issued_status
+    ADD CONSTRAINT FK_employee
+    FOREIGN KEY (issued_emp_id)
+    REFERENCES employees(emp_id);
+
+ALTER TABLE employees
+    ADD CONSTRAINT FK_branch
+    FOREIGN KEY (branch_id)
+    REFERENCES branch(branch_id);
+
+ALTER TABLE return_status
+    ADD CONSTRAINT FK_issued_status
+    FOREIGN KEY (issued_id)
+    REFERENCES issued_status(issued_id);
+ 
 
 
 🧪 tasks.sql
