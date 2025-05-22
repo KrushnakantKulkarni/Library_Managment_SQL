@@ -22,7 +22,7 @@ they are interconnected with appropriate foreign key constraints to ensure refer
 
 🧠 sql concepts used in the project
 this library management system project showcases a comprehensive use of various sql operations essential for relational database design and management. below is the list of key sql concepts used:
-
+```
 create database and create table: to create the database and define schema structure
 
 data types: used to define the kind of data each column can store (e.g., varchar, int, date, float)
@@ -62,7 +62,7 @@ interval: used for calculating date differences (e.g., members registered in the
 count, sum: used for aggregating numerical data (e.g., total revenue, count of books)
 
 this wide variety of sql operations not only handles basic data manipulation but also supports advanced analytics and reporting needed in a functional library management system.
-
+```
 ![Screenshot 2025-05-15 221815](https://github.com/user-attachments/assets/9f0b40d4-cb8c-445e-af8c-0bdae41f07b0)
 
 ⚙️ schema.sql
@@ -159,8 +159,8 @@ ALTER TABLE return_status
     FOREIGN KEY (issued_id)
     REFERENCES issued_status(issued_id);
  
-
-
+```
+```sql
 🧪 tasks.sql
 
 select * from books ;
@@ -272,3 +272,4 @@ join books as bk
 on ist.issued_book_isbn = bk.isbn
 group by 1 , 2;
 
+```
