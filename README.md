@@ -66,6 +66,7 @@ this wide variety of sql operations not only handles basic data manipulation but
 ![Screenshot 2025-05-15 221815](https://github.com/user-attachments/assets/9f0b40d4-cb8c-445e-af8c-0bdae41f07b0)
 
 ⚙️ schema.sql
+```sql
 
 -- Create Database
 CREATE DATABASE databasename;
